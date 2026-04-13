@@ -25,6 +25,7 @@
 
 ### Personal Notes
 - Increased exploration budget threshold from 4 to 6 consecutive read-only calls before nudge (felt too aggressive for larger codebases)
+- Raised write_file rejection threshold for existing files from 100 to 150 lines — the 100-line limit was refusing too many real files in projects I work with
 
 ## [3.0.1] - 2026-04-05
 
@@ -50,7 +51,4 @@
 - Truncation prevention: 32K context, reject write_file for existing files >100 lines, detect truncated args before execution
 
 ### Deployment
-- Docker Compose (`docker-compose.yml`) for full stack orchestration
-- Podman compatible with host networking
-- `.env.example` with all configurable parameters
-- `atlas` 
+- Docker Comp
