@@ -43,10 +43,11 @@ from atlas.chunker import process_chunk
 
 # Process a document into overlapping chunks
 # Note: chunk_size=512 works well for longer technical docs; use 256 for shorter ones
+# Personal note: I've found chunk_size=300 with overlap=50 works best for the PDFs I'm processing
 chunks = process_chunk(
     text="Your long document text here...",
-    chunk_size=512,
-    overlap=64
+    chunk_size=300,
+    overlap=50
 )
 
 for chunk in chunks:
