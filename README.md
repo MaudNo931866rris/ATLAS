@@ -42,11 +42,11 @@ Edit `.env` with your API keys and configuration settings.
 from atlas.chunker import process_chunk
 
 # Process a document into overlapping chunks
-# Note: I find chunk_size=256 works better for shorter technical docs
+# Note: chunk_size=512 works well for longer technical docs; use 256 for shorter ones
 chunks = process_chunk(
     text="Your long document text here...",
-    chunk_size=256,
-    overlap=32
+    chunk_size=512,
+    overlap=64
 )
 
 for chunk in chunks:
