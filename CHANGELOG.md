@@ -28,6 +28,7 @@
 - Raised write_file rejection threshold for existing files from 100 to 150 lines — the 100-line limit was refusing too many real files in projects I work with
 - Lowered Best-of-K candidate count from 5 to 3 — generating 5 candidates was noticeably slow on my machine and 3 seemed sufficient for most edits
 - Disabled SSE streaming progress output by default — the real-time pipeline steps are noisy when running in tmux and I rarely need them; can re-enable with ATLAS_STREAM_PROGRESS=1
+- Increased plan_tasks max subtask limit from 10 to 20 — hit the cap a few times on larger refactors and it was cutting off legitimate task breakdowns
 
 ## [3.0.1] - 2026-04-05
 
@@ -46,5 +47,4 @@
 
 ### CLI Experience
 - `atlas` command: starts all services and launches Aider
-- Streaming progress: `[Turn N/M]` with tool call details, V3 pipeline steps, completion summary
-- Exploration budget: 4 consecutive read-only calls triggers nudge, prevents model from
+- S
