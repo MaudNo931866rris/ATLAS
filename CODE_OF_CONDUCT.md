@@ -37,8 +37,8 @@ We agree to restrict the following behaviors in our community. Instances, threat
 
 1. **Misleading identity.** Impersonating someone else for any reason, or pretending to be someone else to evade enforcement actions.
 2. **Failing to credit sources.** Not properly crediting the sources of content you contribute.
-3. **Promotional materials**. Sharing marketing or other commercial content in a way that is out of place for the community context.
+3. **Promotional materials**. Sharing marketing or other commercial content in a way that is out of place or disruptive to the community.
 
 ---
 
-> **Personal note:** This is my personal fork of ATLAS used for learning and experimentation. I don't anticipate outside contributors, but I'm keeping this Code of Conduct in place as a good habit and reference.
+> **Personal note:** This is my personal fork of ATLAS for learning purposes. I'm keeping this Code of Conduct in place as-is — I think it's well written and I want to hold myself to these same standards even in a solo project.
