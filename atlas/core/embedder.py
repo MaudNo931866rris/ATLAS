@@ -22,7 +22,8 @@ class EmbeddingConfig:
         self,
         model_name: str = "text-embedding-3-small",
         api_key: Optional[str] = None,
-        batch_size: int = 64,
+        # Reduced batch size from 64 to 32 to avoid hitting rate limits on free-tier API keys
+        batch_size: int = 32,
         dimensions: Optional[int] = None,
     ):
         self.model_name = model_name
@@ -95,25 +96,3 @@ class Embedder:
             )
 
             kwargs = {"input": batch, "model": self.config.model_name}
-            if self.config.dimensions is not None:
-                kwargs["dimensions"] = self.config.dimensions
-
-            response = client.embeddings.create(**kwargs)
-            # Preserve original ordering returned by the API
-            sorted_data = sorted(response.data, key=lambda d: d.index)
-            all_embeddings.extend(item.embedding for item in sorted_data)
-
-        return np.array(all_embeddings, dtype=np.float32)
-
-    def embed_query(self, text: str) -> np.ndarray:
-        """Embed a single query string.
-
-        Convenience wrapper around :meth:`embed` for single-string use cases.
-
-        Args:
-            text: The query string to embed.
-
-        Returns:
-            A 1-D numpy array representing the query vector.
-        """
-        return self.embed([text])[0]
