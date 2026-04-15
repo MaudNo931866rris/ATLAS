@@ -26,7 +26,13 @@ def process_chunk(
 
     Raises:
         ValueError: If ``chunk_overlap`` is greater than or equal to ``chunk_size``.
+        ValueError: If ``chunk_size`` is not a positive integer.
     """
+    if chunk_size <= 0:
+        raise ValueError(
+            f"chunk_size ({chunk_size}) must be a positive integer."
+        )
+
     if chunk_overlap >= chunk_size:
         raise ValueError(
             f"chunk_overlap ({chunk_overlap}) must be less than chunk_size ({chunk_size})."
@@ -99,35 +105,4 @@ def merge_short_chunks(
     min_length: int = 64,
     separator: str = " ",
 ) -> List[str]:
-    """Merge consecutive chunks that are shorter than ``min_length`` characters.
-
-    Short trailing chunks can degrade embedding quality; this helper collapses
-    them into the preceding chunk.
-
-    Args:
-        chunks: Input list of text chunks.
-        min_length: Chunks shorter than this threshold will be merged.
-        separator: String used to join merged chunks.
-
-    Returns:
-        A new list of chunks where short chunks have been merged.
-    """
-    if not chunks:
-        return []
-
-    merged: List[str] = []
-    buffer: Optional[str] = None
-
-    for chunk in chunks:
-        if buffer is None:
-            buffer = chunk
-        elif len(chunk) < min_length:
-            buffer = buffer + separator + chunk
-        else:
-            merged.append(buffer)
-            buffer = chunk
-
-    if buffer is not None:
-        merged.append(buffer)
-
-    return merged
+    """Merge consecutive chunks that are 
