@@ -83,6 +83,9 @@ class Embedder:
         if not texts:
             raise ValueError("Cannot embed an empty list of texts.")
 
+        # Strip whitespace from texts before embedding to avoid wasting tokens on padding
+        texts = [t.strip() for t in texts]
+
         all_embeddings: List[List[float]] = []
         client = self._get_client()
 
@@ -94,5 +97,3 @@ class Embedder:
                 batch_start + len(batch),
                 len(texts),
             )
-
-            kwargs = {"input": batch, "model": self.config.model_name}
