@@ -84,16 +84,15 @@ class Embedder:
             raise ValueError("Cannot embed an empty list of texts.")
 
         # Strip whitespace from texts before embedding to avoid wasting tokens on padding
+        # Also filter out any texts that are empty after stripping to avoid API errors
         texts = [t.strip() for t in texts]
+        texts = [t for t in texts if t]
+
+        if not texts:
+            raise ValueError("All texts were empty after stripping whitespace.")
 
         all_embeddings: List[List[float]] = []
         client = self._get_client()
 
         for batch_start in range(0, len(texts), self.config.batch_size):
             batch = texts[batch_start : batch_start + self.config.batch_size]
-            logger.debug(
-                "Embedding batch %d-%d of %d texts",
-                batch_start,
-                batch_start + len(batch),
-                len(texts),
-            )
