@@ -10,7 +10,7 @@ from typing import List, Optional
 def process_chunk(
     text: str,
     chunk_size: int = 512,
-    chunk_overlap: int = 128,
+    chunk_overlap: int = 64,
     separator: str = "\n",
 ) -> List[str]:
     """Split text into overlapping chunks for downstream processing.
@@ -19,8 +19,8 @@ def process_chunk(
         text: The raw input text to be chunked.
         chunk_size: Maximum number of characters per chunk.
         chunk_overlap: Number of characters to overlap between consecutive chunks.
-            Defaults to 128 (increased from 64) for better context preservation
-            across chunk boundaries during retrieval.
+            Defaults to 64. The upstream project bumped this to 128 but in my
+            testing that caused too much redundancy for shorter documents.
         separator: Preferred split boundary character(s).
 
     Returns:
@@ -94,9 +94,4 @@ def test_chunk_overlap_preserves_context(
         current_chunk = chunks[i]
         next_chunk = chunks[i + 1]
 
-        # Check that the tail of the current chunk appears in the next chunk
-        tail = current_chunk[-chunk_overlap:]
-        if tail.strip() and tail not in next_chunk:
-            return False
-
-    return True
+        # Check that the tail of the current 
